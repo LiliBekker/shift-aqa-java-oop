@@ -7,20 +7,12 @@ import static homework21.data.TransformType.*;
 
 public class TransformerApp {
     public static void main(String[] args) {
-        Autobot autobot = createAutobot();
-        Decepticon decepticon = createDecepticon();
+        Autobot autobot = new Autobot("Bumblebee", "Autobots");
+        Decepticon decepticon = new Decepticon("Megatron", "Decepticons");
 
         runAutobotScenario(autobot);
         System.out.println();
         runDecepticonScenario(decepticon);
-    }
-
-    public static Autobot createAutobot() {
-        return new Autobot("Bumblebee", "Autobots");
-    }
-
-    public static Decepticon createDecepticon() {
-        return new Decepticon("Megatron", "Decepticons");
     }
 
     public static void runAutobotScenario(Autobot autobot) {
