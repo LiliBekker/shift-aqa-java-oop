@@ -1,41 +1,41 @@
 package homework21;
 
+import homework21.Action.Action;
 import homework21.Transformer.Autobot;
 import homework21.Transformer.Decepticon;
+import homework21.Transformer.Transformer;
+import homework21.data.TransformType;
+
+import java.util.List;
 
 import static homework21.data.TransformType.*;
 
 public class TransformerApp {
     public static void main(String[] args) {
-        Autobot autobot = createAutobot();
-        Decepticon decepticon = createDecepticon();
+        Autobot autobot = new Autobot("Bumblebee", "Autobots");
+        Decepticon decepticon = new Decepticon("Megatron", "Decepticons");
 
-        runAutobotScenario(autobot);
+        runScenario(autobot, VEHICLE);
         System.out.println();
-        runDecepticonScenario(decepticon);
+        runScenario(decepticon, GROUND);
+
+        List<Transformer> transformers = List.of(autobot, decepticon);
+        getAllTransformer(transformers);
     }
 
-    public static Autobot createAutobot() {
-        return new Autobot("Bumblebee", "Autobots");
+    public static void runScenario(Transformer transformer, TransformType type) {
+        System.out.println("\t\t" + transformer.getClass().getSimpleName());
+        Action action = (Action) transformer;
+        action.run();
+        action.fire();
+        action.charge();
+        transformer.transform(type);
     }
 
-    public static Decepticon createDecepticon() {
-        return new Decepticon("Megatron", "Decepticons");
-    }
-
-    public static void runAutobotScenario(Autobot autobot) {
-        System.out.println("\t\tAutobot");
-        autobot.run();
-        autobot.fire();
-        autobot.charge();
-        autobot.transform(VEHICLE);
-    }
-
-    public static void runDecepticonScenario(Decepticon decepticon) {
-        System.out.println("\t\tDecepticon");
-        decepticon.run();
-        decepticon.fire();
-        decepticon.charge();
-        decepticon.transform(GROUND);
+    public static void getAllTransformer(List<Transformer> transformers) {
+        System.out.println("\n\tСписок трансформеров");
+        for (Transformer transformer : transformers) {
+            System.out.println("Имя: " + transformer.getName() + " | Тип: " + transformer.getClass().getSimpleName());
+        }
     }
 }
